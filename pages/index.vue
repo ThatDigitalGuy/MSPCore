@@ -1,15 +1,9 @@
 <template>
-  <div>
-    
-  </div>
+  <h1>test</h1>
 </template>
 
-<script lang="ts" setup>
+<script setup lang="ts">
 definePageMeta({
   layout: 'app'
 })
 </script>
-
-<style>
-
-</style>

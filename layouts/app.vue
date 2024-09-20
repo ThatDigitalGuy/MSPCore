@@ -1,62 +1,23 @@
-<script setup lang="ts">
-  import { ref, watchEffect } from 'vue'
-  import { useBreakpoint } from 'vuestic-ui'
-
-  const breakpoints = useBreakpoint()
-
-  const isSidebarVisible = ref(breakpoints.smUp)
-
-  watchEffect(() => {
-    isSidebarVisible.value = breakpoints.smUp
-  })
-
-  const menu = [
-    { icon: 'add', title: 'Add' },
-    { icon: 'phone', title: 'Phone' },
-    { icon: 'email', title: 'Email' },
-    { icon: 'settings', title: 'Settings' },
-    { icon: 'logout', title: 'Logout' },
-  ]
-</script>
-
 <template>
-  <VaLayout
-    :top="{ fixed: true, order: 1 }"
-    :left="{ fixed: true, absolute: breakpoints.smDown, order: 2, overlay: breakpoints.smDown && isSidebarVisible }"
-    @left-overlay-click="isSidebarVisible = false"
-  >
-    <template #top>
-      <VaNavbar>
-        <template #left>
-          <VaButton
-            preset="secondary"
-            :icon="isSidebarVisible ? 'menu_open' : 'menu'"
-            @click="isSidebarVisible = !isSidebarVisible"
-          />
-        </template>
-      </VaNavbar>
-      <VaDivider style="margin: 0" />
-    </template>
+  <v-responsive class="border rounded">
+    <v-app>
+      <v-app-bar title="MSPCore" color="primary">
+        <v-btn icon>
+          <v-icon>mdi-dots-vertical</v-icon>
+        </v-btn>
+      </v-app-bar>
 
-    <template #left>
-      <VaSidebar v-model="isSidebarVisible">
-        <VaSidebarItem v-for="{ icon, title } in menu" :key="icon">
-          <VaSidebarItemContent>
-            <VaIcon :name="icon" />
-            <VaSidebarItemTitle>
-              {{ title }}
-            </VaSidebarItemTitle>
-          </VaSidebarItemContent>
-        </VaSidebarItem>
-      </VaSidebar>
-    </template>
+      <v-navigation-drawer>
+        <v-list>
+          <v-list-item title="Navigation drawer"></v-list-item>
+        </v-list>
+      </v-navigation-drawer>
 
-    <template #content>
-      <main>
-        <article>
+      <v-main>
+        <v-container>
           <slot />
-        </article>
-      </main>
-    </template>
-  </VaLayout>
+        </v-container>
+      </v-main>
+    </v-app>
+  </v-responsive>
 </template>

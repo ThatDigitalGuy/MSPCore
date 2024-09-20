@@ -1,6 +1,8 @@
 <template>
   <NuxtLayout>
-    <slot />
+    <v-app>
+      <NuxtPage />
+    </v-app>
   </NuxtLayout>
 </template>
 
